@@ -1,0 +1,16 @@
+.day {
+    width: 100%;
+    height: 100%;
+    font-size: 1.6rem;
+    font-weight: 400;
+    background-color: var(--bg-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all .1s ease-out;
+    cursor: pointer;
+}
+
+.day:hover {
+    box-shadow: inset 0px 0px 3px rgba(0, 0, 0, .15)
+}

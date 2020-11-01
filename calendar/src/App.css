@@ -1,0 +1,38 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&family=Raleway:wght@300;400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;600;700;800&display=swap');
+/* Global Styles */
+
+:root {
+  --primary-color: #414af2;
+  --bg-color: #fafafa;
+  --bg-color-dark: rgba(13, 21, 26, 0.78);
+  --bg-color-light: rgb(41, 61, 73);
+  --accent-color: #eb4848;
+  --font-color-accent: #96f6ae;
+  --font-color-accent-dark: #272727;
+  --font-color-light: rgb(236, 248, 255);
+  --font-color-grey: rgb(94, 140, 167);
+  --font-color-dark: rgb(12, 12, 12);
+  /* Fonts */
+  --font-primary: 'Jost', sans-serif;
+  /*--font-secondary: 'Playfair Display', serif;*/
+  --font-secondary: 'Open Sans', sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 0.625rem;
+}
+
+body {
+  font-family: var(--font-primary);
+  line-height: 1.6;
+  background-color: var(--bg-color);
+  color: var(--font-color-dark);
+  overflow-x: hidden;
+}
