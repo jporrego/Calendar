@@ -8,6 +8,7 @@
     grid-template-rows: max-content 1fr;
     justify-content: center;
     overflow: hidden;
+    border-radius: 1rem;
 }
 
 .calendar__month-year {
@@ -22,6 +23,19 @@
     box-shadow: 0px 2px 3px rgba(0, 0, 0, .1);
 }
 
+.calendar__month-year__date select {
+    border: none;
+    text-decoration: none;
+    background-color: var(--primary-color);
+    color: var(--font-color-light);
+    font-size: 2.2rem;
+    font-weight: 500;
+    text-transform: capitalize;
+    width: 14rem;
+    user-select: none;
+    outline: none;
+}
+
 .calendar__month-year__date {
     font-size: 2.2rem;
     font-weight: 500;
@@ -32,6 +46,7 @@
 .calendar__month-year__buttons {
     display: flex;
     justify-content: flex-end;
+    align-items: center;
 }
 
 .change-month-button {

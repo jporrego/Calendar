@@ -39,10 +39,53 @@ function Calendar() {
 
         setSelectedDate(date);        
     }
+
+    const checkSelected = (value) => {
+        if (value = month) {
+            return "selected";
+        }
+    }
+
+    let yearRange = [];
+    for (let i = 1900; i <= 2100; i++){
+        yearRange.push(i);
+    }
+
+    const selectMonth = (e) => {
+        setSelectedDate(new Date(`"${e.target.value} ${year}"`));        
+    }
+
+    const selectYear = (e) => {
+        setSelectedDate(new Date(`"${month} ${e.target.value}"`));  
+    }
+
     return (
         <div className="calendar">
             <div className="calendar__month-year">
-                <div className="calendar__month-year__date">{month} {year}</div>                
+                <div className="calendar__month-year__date"> 
+                    <label for="months"></label>
+                    <select id="months" name="months" value={month.charAt(0).toLowerCase() + month.slice(1)} onChange={selectMonth}>
+                      <option value="january">january</option>
+                      <option value="february">february</option>
+                      <option value="march">march</option>
+                      <option value="april">april</option>
+                      <option value="may">may</option>
+                      <option value="june">june</option>
+                      <option value="july">july</option>
+                      <option value="august">august</option>
+                      <option value="september">september</option>
+                      <option value="october">october</option>
+                      <option value="november">november</option>
+                      <option value="december">december</option>
+                    </select>
+
+                    <label for="year"></label>
+                    <select id="year" name="year" value={year} onChange={selectYear}>
+                        {yearRange.map((i) => (
+                            <option value={i} key={i}>{i}</option>
+                        ))}
+                    </select>
+                </div>                
                 <div className="calendar__month-year__buttons">
                     <div onClick={goPreviousMonth} className="change-month-button">
                         <svg xmlns="http://www.w3.org/2000/svg" width="1.5rem" height="1.5rem" viewBox="0 0 24 24" style={{transform:"scale(-1, 1)"}}>
@@ -57,7 +100,8 @@ function Calendar() {
                 </div>
                 
             </div>
-            <Weeks firstDay={firstDay} daysInMonth={daysInMonth} daysPreviousMonth = {previousMonthDays}></Weeks>
+            <Weeks firstDay={firstDay} daysInMonth={daysInMonth} daysPreviousMonth = {previousMonthDays} 
+            month = {month} year = {year}></Weeks>
             {/* <Month month={month} year={year}></Month> */}
         </div>
     )

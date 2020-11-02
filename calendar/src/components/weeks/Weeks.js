@@ -38,7 +38,8 @@ function Weeks(props) {
                 ))}
 
                 {monthDays.map((i) => (
-                    <Day day={i} currentMonth={true} key={i} currentDay={format(new Date, "d")}></Day>
+                    <Day day={i} currentMonth={true} key={i} currentDay={format(new Date, "d")}
+                    month = {props.month} year = {props.year}></Day>
                 ))}
 
                 {nextMonthDays.map((i) => (

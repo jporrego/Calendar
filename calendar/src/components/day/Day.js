@@ -1,3 +1,4 @@
+import { format } from 'date-fns';
 import React from 'react'
 
 import './Day.css';
@@ -5,7 +6,7 @@ import './Day.css';
 function Day(props) {
 
     const setColor = () => {
-        if (props.currentDay == props.day && props.currentMonth) {
+        if (props.currentDay == props.day && props.month == format(new Date, "MMMM") && props.year == format(new Date, "yyyy")) {
             return ["var(--primary-color)", "var(--font-color-light)"];
         } else if (props.currentMonth){
             return ["var(--bg-color)", "var(--font-color-dark)"];
