@@ -1,0 +1,25 @@
+.weeks {
+    display: grid;
+    grid-template-rows: max-content 1fr;
+    padding: 1rem;
+}
+
+.weeks__day-name {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-template-rows: 1fr;
+    justify-items: center;
+    align-items: center;
+    font-size: 1.6rem;
+    font-weight: 600;
+    text-transform: capitalize;
+}
+
+.weeks__content {
+    background-color: var(--bg-color);
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-template-rows: repeat(6, 1fr);
+    justify-items: center;
+    align-items: center;
+}
