@@ -18,6 +18,8 @@
     font-size: 1.6rem;
     font-weight: 500;
     padding: .5rem 0rem .5rem 1rem;
+    display: flex;
+    align-items: center;
 }
 
 .events__event-list {
@@ -43,13 +45,13 @@
     font-weight: 300;
 }
 
-.events__close-btn {
+.events__add-btn {
     position: absolute;
     right: 0;
     bottom: 0;
     font-size: 2rem;
     font-weight: 500;
-    background-color: var(--accent-color);
+    background-color: var(--primary-color);
     color: var(--font-color-light);
     width: 3rem;
     height: 3rem;
@@ -64,6 +66,15 @@
     transition: all .15s ease-out;
 }
 
-.events__close-btn:hover {
+.events__add-btn:hover {
     transform: scale(1.075);
+}
+
+.events__close-btn {
+    margin-left: auto;
+    margin-right: 1.5rem;
+    font-size: 2rem;
+    font-weight: 500;
+    user-select: none;
+    cursor: pointer;
 }

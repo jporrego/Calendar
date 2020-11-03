@@ -16,6 +16,7 @@ function Weeks(props) {
 
     useEffect(() => {
         calculateDays();
+        hideEvents();
     }, [props.month, props.year]);
 
     const calculateDays = () => {
@@ -97,7 +98,7 @@ function Weeks(props) {
         }           
     ]
     
-    localStorage.setItem('events', JSON.stringify(events));
+    
 
     const showEvents = (eventList) => {
         setOpenEvents(true);
@@ -140,7 +141,7 @@ function Weeks(props) {
                 ))}
             </motion.div>            
             <motion.div className="event-modal">
-                <Event open={openEvents} hideEventsFunc={hideEvents} eventList={eventList}></Event>
+                <Event open={openEvents} hideEventsFunc={hideEvents} eventList={eventList} month = {props.month} year = {props.year}></Event>
             </motion.div>
         </div>
     )
