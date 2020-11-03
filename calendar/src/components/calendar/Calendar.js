@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import { format, formatDistance, formatRelative, subDays, addMonths, getDaysInMonth } from 'date-fns'
+import { motion } from "framer-motion"
 
 import Weeks from '../weeks/Weeks.js';
 import './Calendar.css';
@@ -40,12 +41,6 @@ function Calendar() {
         setSelectedDate(date);        
     }
 
-    const checkSelected = (value) => {
-        if (value = month) {
-            return "selected";
-        }
-    }
-
     let yearRange = [];
     for (let i = 1900; i <= 2100; i++){
         yearRange.push(i);
@@ -59,10 +54,20 @@ function Calendar() {
         setSelectedDate(new Date(`"${month} ${e.target.value}"`));  
     }
 
+    const variants = {
+        visible: { opacity: 1, y:"0px", 
+        transition: {
+          when: "beforeChildren",
+          staggerChildren: 0,
+          duration: .5,
+        }, },
+        hidden: { opacity: 0, y:"-15spx" },
+      }
+
     return (
-        <div className="calendar">
-            <div className="calendar__month-year">
-                <div className="calendar__month-year__date"> 
+        <motion.div className="calendar" initial="hidden" animate="visible" variants={variants}>
+            <motion.div className="calendar__month-year">
+                <motion.div className="calendar__month-year__date"> 
                     <label for="months"></label>
                     <select id="months" name="months" value={month.charAt(0).toLowerCase() + month.slice(1)} onChange={selectMonth}>
                       <option value="january">january</option>
@@ -85,8 +90,8 @@ function Calendar() {
                             <option value={i} key={i}>{i}</option>
                         ))}
                     </select>
-                </div>                
-                <div className="calendar__month-year__buttons">
+                </motion.div>                
+                <motion.div className="calendar__month-year__buttons">
                     <div onClick={goPreviousMonth} className="change-month-button">
                         <svg xmlns="http://www.w3.org/2000/svg" width="1.5rem" height="1.5rem" viewBox="0 0 24 24" style={{transform:"scale(-1, 1)"}}>
                             <path d="M5 3l3.057-3 11.943 12-11.943 12-3.057-3 9-9z"/>
@@ -97,13 +102,12 @@ function Calendar() {
                             <path d="M5 3l3.057-3 11.943 12-11.943 12-3.057-3 9-9z"/>
                             </svg>
                     </div>
-                </div>
-                
-            </div>
+                </motion.div>    
+            </motion.div>
             <Weeks firstDay={firstDay} daysInMonth={daysInMonth} daysPreviousMonth = {previousMonthDays} 
             month = {month} year = {year}></Weeks>
             {/* <Month month={month} year={year}></Month> */}
-        </div>
+        </motion.div>
     )
 }
 

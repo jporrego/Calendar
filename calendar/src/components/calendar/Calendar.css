@@ -34,6 +34,18 @@
     width: 14rem;
     user-select: none;
     outline: none;
+    cursor: pointer;
+    padding: .25rem;
+    border-radius: .5rem;
+    transition: all .125s ease-out;
+}
+
+.calendar__month-year__date select:hover {
+    background-color: rgba(255, 255, 255, .15);
+}
+
+.calendar__month-year__date select * {
+    background-color: var(--primary-color);
 }
 
 .calendar__month-year__date {

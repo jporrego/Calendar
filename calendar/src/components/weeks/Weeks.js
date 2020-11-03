@@ -1,5 +1,6 @@
 import React from 'react'
 import { format, getDaysInMonth } from 'date-fns';
+import { motion } from "framer-motion";
 
 import Day from '../day/Day.js';
 import './Weeks.css';
@@ -21,31 +22,55 @@ function Weeks(props) {
         nextMonthDays.push(i);
     }
 
+
+    const variants = {
+        visible: { opacity: 1, y:"0px", transition: {
+          when: "beforeChildren",
+          staggerChildren: .1,
+          duration: .25,
+        }, },
+        hidden: { opacity: 0, y:"-10px" },
+      }
+
+    const dayVariants = {
+      visible: { opacity: 1, y:"0px", transition: {
+        when: "beforeChildren",
+        staggerChildren: .01,
+        duration: .3,
+      }, },
+      hidden: { opacity: 0, y:"-10px" },
+    }
     return (
         <div className="weeks">
-            <div className="weeks__day-name">
-                    <div>mon</div>
-                    <div>tue</div>
-                    <div>wed</div>
-                    <div>thu</div>
-                    <div>fri</div>
-                    <div>sat</div>
-                    <div>sun</div>
-            </div>
-            <div className="weeks__content">
+            <motion.div className="weeks__day-name" initial="hidden" animate="visible" variants={variants}>
+                    <motion.div variants={variants}>mon</motion.div>
+                    <motion.div variants={variants}>tue</motion.div>
+                    <motion.div variants={variants}>wed</motion.div>
+                    <motion.div variants={variants}>thu</motion.div>
+                    <motion.div variants={variants}>fri</motion.div>
+                    <motion.div variants={variants}>sat</motion.div>
+                    <motion.div variants={variants}>sun</motion.div>
+            </motion.div>
+            <motion.div className="weeks__content" initial="hidden" animate="visible" variants={dayVariants}>
                 {prevMonthDays.map((i) => (
-                    <Day day={i} key={i} currentMonth={false}></Day>
+                    <motion.div variants={dayVariants} style={{width: "100%", height: "100%"}}>
+                        <Day day={i} key={i} currentMonth={false}></Day>
+                    </motion.div>
                 ))}
 
                 {monthDays.map((i) => (
-                    <Day day={i} currentMonth={true} key={i} currentDay={format(new Date, "d")}
-                    month = {props.month} year = {props.year}></Day>
+                    <motion.div variants={dayVariants} style={{width: "100%", height: "100%"}}>
+                        <Day day={i} currentMonth={true} key={i} currentDay={format(new Date, "d")}
+                        month = {props.month} year = {props.year}></Day>
+                     </motion.div>
                 ))}
 
                 {nextMonthDays.map((i) => (
-                    <Day day={i} key={i} currentMonth={false}></Day>
+                    <motion.div variants={dayVariants} style={{width: "100%", height: "100%"}}>
+                        <Day day={i} key={i} currentMonth={false}></Day>
+                    </motion.div>
                 ))}
-            </div>            
+            </motion.div>            
         </div>
     )
 }
