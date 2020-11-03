@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import { format, getDaysInMonth } from 'date-fns';
 import { motion } from "framer-motion";
 
@@ -6,21 +6,41 @@ import Day from '../day/Day.js';
 import './Weeks.css';
 
 function Weeks(props) {
+    const [monthDays, setMonthDays] = useState([]);
+    const [prevMonthDays, setPrevMonthDays] = useState([]);
+    const [nextMonthDays, setNextMonthDays] = useState([]);
 
-    let monthDays = [];
-    for (let i = 1; i <= props.daysInMonth; i++){
-        monthDays.push(i);
-    }
+    useEffect(() => {
+        calculateDays();
+    }, [props.month, props.year]);
 
-    let prevMonthDays = [];
-    for (let i = (props.daysPreviousMonth - props.firstDay + 2); i <= props.daysPreviousMonth; i++){
-        prevMonthDays.push(i);
-    }
+    const calculateDays = () => {
+        setMonthDays([]);
+        setPrevMonthDays([]);
+        setNextMonthDays([]);
 
-    let nextMonthDays = [];
-    for (let i = 1; i <= (42 - props.daysInMonth - props.firstDay + 1); i++){
-        nextMonthDays.push(i);
-    }
+        setTimeout(() => {
+            let monthDaysList = [];
+            for (let i = 1; i <= props.daysInMonth; i++){
+                monthDaysList.push(i);
+            }
+            setMonthDays(monthDaysList);
+
+            let prevMonthDaysList = [];
+            for (let i = (props.daysPreviousMonth - props.firstDay + 2); i <= props.daysPreviousMonth; i++){
+                prevMonthDaysList.push(i);
+            }
+            setPrevMonthDays(prevMonthDaysList);
+
+            let nextMonthDaysList = [];
+            for (let i = 1; i <= (42 - props.daysInMonth - props.firstDay + 1); i++){
+                nextMonthDaysList.push(i);
+            }
+            setNextMonthDays(nextMonthDaysList);
+        }, 10);
+
+        
+    } 
 
 
     const variants = {
