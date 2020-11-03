@@ -3,12 +3,16 @@ import { format, getDaysInMonth } from 'date-fns';
 import { motion } from "framer-motion";
 
 import Day from '../day/Day.js';
+import Event from '../events/Events.js';
 import './Weeks.css';
+
 
 function Weeks(props) {
     const [monthDays, setMonthDays] = useState([]);
     const [prevMonthDays, setPrevMonthDays] = useState([]);
     const [nextMonthDays, setNextMonthDays] = useState([]);
+    const [openEvents, setOpenEvents] = useState(false);
+    const [eventList, setEventList] = useState([]);
 
     useEffect(() => {
         calculateDays();
@@ -57,9 +61,53 @@ function Weeks(props) {
         when: "beforeChildren",
         staggerChildren: .01,
         duration: .3,
+        initialDelay: 1,
       }, },
       hidden: { opacity: 0, y:"-10px" },
     }
+
+    const events = [
+        {
+            day: 5,
+            month: "November",
+            year: 2020,
+            text: "text text text text text text text",
+            time: "10:00"
+        },
+        {
+            day: 17,
+            month: "November",
+            year: 2020,
+            text: "text text text text text text text",
+            time: "11:45"
+        },
+        {
+            day: 10,
+            month: "December",
+            year: 2020,
+            text: "text text text text text text text",
+            time: "14:30"
+        },
+        {
+            day: 30,
+            month: "October",
+            year: 2020,
+            text: "text text text text text text text",
+            time: "20:15"
+        }           
+    ]
+    
+    localStorage.setItem('events', JSON.stringify(events));
+
+    const showEvents = (eventList) => {
+        setOpenEvents(true);
+        setEventList(eventList);
+    }
+
+    const hideEvents = () => {
+        setOpenEvents(false);
+    }
+
     return (
         <div className="weeks">
             <motion.div className="weeks__day-name" initial="hidden" animate="visible" variants={variants}>
@@ -81,7 +129,7 @@ function Weeks(props) {
                 {monthDays.map((i) => (
                     <motion.div variants={dayVariants} style={{width: "100%", height: "100%"}}>
                         <Day day={i} currentMonth={true} key={i} currentDay={format(new Date, "d")}
-                        month = {props.month} year = {props.year}></Day>
+                        month = {props.month} year = {props.year} showEventsFunc={showEvents} ></Day>
                      </motion.div>
                 ))}
 
@@ -91,6 +139,9 @@ function Weeks(props) {
                     </motion.div>
                 ))}
             </motion.div>            
+            <motion.div className="event-modal">
+                <Event open={openEvents} hideEventsFunc={hideEvents} eventList={eventList}></Event>
+            </motion.div>
         </div>
     )
 }

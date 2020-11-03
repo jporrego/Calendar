@@ -7,7 +7,6 @@
     grid-template-columns: 1fr;
     grid-template-rows: max-content 1fr;
     justify-content: center;
-    overflow: hidden;
     border-radius: 1rem;
 }
 
@@ -15,7 +14,7 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     width: 100%;
-    padding: 1rem 0rem 1rem 2rem;
+    padding: 1rem 0rem 1rem 1rem;
     margin-bottom: 1rem;
     justify-self: center;
     color: var(--font-color-light);
