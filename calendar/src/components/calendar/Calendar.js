@@ -1,4 +1,5 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
+import {CalendarContext} from '../../context/CalendarContext'
 import { format, formatDistance, formatRelative, subDays, addMonths, getDaysInMonth } from 'date-fns'
 import { motion } from "framer-motion"
 
@@ -7,6 +8,8 @@ import './Calendar.css';
 
 
 function Calendar() {
+    const {monthy, yeary} = useContext(CalendarContext);
+
     const [selectedDate, setSelectedDate] = useState(new Date, "MMMM yyyy");
     const [month, setMonth] = useState(format(new Date, "MMMM"));
     const [year, setYear] = useState(format(new Date, "yyyy"));

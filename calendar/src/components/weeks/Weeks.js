@@ -123,14 +123,14 @@ function Weeks(props) {
             <motion.div className="weeks__content" initial="hidden" animate="visible" variants={dayVariants}>
                 {prevMonthDays.map((i) => (
                     <motion.div variants={dayVariants} style={{width: "100%", height: "100%"}}>
-                        <Day day={i} key={i} currentMonth={false}></Day>
+                        <Day day={i} key={i} currentMonth={false} ></Day>
                     </motion.div>
                 ))}
 
                 {monthDays.map((i) => (
                     <motion.div variants={dayVariants} style={{width: "100%", height: "100%"}}>
                         <Day day={i} currentMonth={true} key={i} currentDay={format(new Date, "d")}
-                        month = {props.month} year = {props.year} showEventsFunc={showEvents} ></Day>
+                        month = {props.month} year = {props.year} showEventsFunc={showEvents} eventList={eventList}></Day>
                      </motion.div>
                 ))}
 
@@ -141,7 +141,8 @@ function Weeks(props) {
                 ))}
             </motion.div>            
             <motion.div className="event-modal">
-                <Event open={openEvents} hideEventsFunc={hideEvents} eventList={eventList} month = {props.month} year = {props.year}></Event>
+                <Event open={openEvents} hideEventsFunc={hideEvents} 
+                eventList={eventList} month = {props.month} year = {props.year}></Event>
             </motion.div>
         </div>
     )

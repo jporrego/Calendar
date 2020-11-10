@@ -8,7 +8,7 @@ function Day(props) {
 
     useEffect(() => {
         checkEvents();
-    }, [])
+    }, [props.eventList])
 
     const setColor = () => {
         if (props.currentDay == props.day && props.month == format(new Date, "MMMM") && props.year == format(new Date, "yyyy")) {
