@@ -13,6 +13,7 @@ function CalendarContextProvider(props) {
     const [previousMonth, setPreviousMonth] = useState(format(addMonths(new Date, - 1), "MMMM"));
     const [previousMonthDays, setPreviousMonthDays] = useState(getDaysInMonth(addMonths(new Date, - 1)));
     const [nextMonth, setNextMonth] = useState(format(addMonths(new Date, + 1), "MMMM"));
+    const [selectedDay, setSelectedDay] = useState(format(new Date, "d"));
 
     useEffect(() => {
         // Actualiza el título del documento usando la API del navegador
@@ -42,6 +43,12 @@ function CalendarContextProvider(props) {
         }
     }
 
+    const selectDay = (day) => {
+        const date = new Date(`${month} ${day} ${year}`);
+        //setSelectedDay(format(`${month} ${day} ${year}`, "d"))
+        setSelectedDay(format(date, "d"))
+    }
+
     return (
         <CalendarContext.Provider 
         value={{
@@ -53,7 +60,9 @@ function CalendarContextProvider(props) {
             previousMonth,
             previousMonthDays,
             nextMonth,
-            changeDate
+            changeDate,
+            selectedDay,
+            selectDay
         }}>
             {props.children}
         </CalendarContext.Provider>

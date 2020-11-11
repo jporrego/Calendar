@@ -1,9 +1,12 @@
+import React, {useState, useEffect, useContext} from 'react'
+import { CalendarContext } from '../../context/CalendarContext';
 import { format } from 'date-fns';
-import React, {useState, useEffect} from 'react'
 
 import './Day.css';
 
 function Day(props) {
+    const calendarContext = useContext(CalendarContext);
+
     const [events, setEvents] = useState([]);
 
     useEffect(() => {
@@ -38,11 +41,13 @@ function Day(props) {
         
     }
 
+    const showEvents = () => {
+        props.showEventsFunc([events, props.day]);
+        calendarContext.selectDay(props.day);
+    }
     
     return (
-        <div className="day" style={{backgroundColor: setColor()[0], color: setColor()[1]}} onClick={() => {
-            props.showEventsFunc([events, props.day])
-        }}>
+        <div className="day" style={{backgroundColor: setColor()[0], color: setColor()[1]}} onClick={showEvents}>
             {props.day}
             <div className = {events.length > 0 ? "day__notification-true" : "day__notification-false"}>.</div>
         </div>

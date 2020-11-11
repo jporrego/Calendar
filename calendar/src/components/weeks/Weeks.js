@@ -4,7 +4,7 @@ import { format, getDaysInMonth } from 'date-fns';
 import { motion } from "framer-motion";
 
 import Day from '../day/Day.js';
-import Event from '../events/Events.js';
+import Events from '../events/Events.js';
 import './Weeks.css';
 
 
@@ -147,8 +147,8 @@ function Weeks() {
                 ))}
             </motion.div>            
             <motion.div className="event-modal">
-                <Event open={openEvents} hideEventsFunc={hideEvents} 
-                eventList={eventList} month = {month} year = {year}></Event>
+                <Events open={openEvents} hideEventsFunc={hideEvents} 
+                eventList={eventList} month = {month} year = {year} showEventsFunc={showEvents}></Events>
             </motion.div>
         </div>
     )
