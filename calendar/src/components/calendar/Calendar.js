@@ -8,40 +8,30 @@ import './Calendar.css';
 
 
 function Calendar() {
-    const {monthy, yeary} = useContext(CalendarContext);
-
-    const [selectedDate, setSelectedDate] = useState(new Date, "MMMM yyyy");
-    const [month, setMonth] = useState(format(new Date, "MMMM"));
-    const [year, setYear] = useState(format(new Date, "yyyy"));
-    const [firstDay, setFirstDay] = useState(format(new Date(format(new Date, "yyyy"), format(new Date, "M") - 1, 1), "i"));
-    const [daysInMonth, setDaysInMonth] = useState(getDaysInMonth(new Date));
-    const [previousMonth, setPreviousMonth] = useState(format(addMonths(new Date, - 1), "MMMM"));
-    const [previousMonthDays, setPreviousMonthDays] = useState(getDaysInMonth(addMonths(new Date, - 1)));
-    const [nextMonth, setNextMonth] = useState(format(addMonths(new Date, + 1), "MMMM"));
-
-    useEffect(() => {
-        // Actualiza el título del documento usando la API del navegador
-        setMonth(format(selectedDate, "MMMM"));
-        setYear(format(selectedDate, "yyyy"));
-        setFirstDay(format(new Date(format(selectedDate, "yyyy"), format(selectedDate, "M") - 1, 1), "i"))
-        setDaysInMonth(getDaysInMonth(selectedDate));
-        setPreviousMonth(format(addMonths(selectedDate, - 1), "MMMM"));
-        setPreviousMonthDays(getDaysInMonth(addMonths(selectedDate, - 1)));
-        setNextMonth(format(addMonths(selectedDate, + 1), "MMMM"));
-    }, [selectedDate]);
+    const 
+    {month, 
+    year,
+    firstDay,
+    daysInMonth,
+    previousMonth,
+    previousMonthDays,
+    nextMonth,
+    changeDate} = useContext(CalendarContext);
 
     const goPreviousMonth = () => {
-        let date = new Date(selectedDate);
-        date = addMonths(date, - 1);
-
-        setSelectedDate(date);        
+        changeDate(null, false);        
     }
 
     const goNextMonth = () => {
-        let date = new Date(selectedDate);
-        date = addMonths(date, + 1);
+        changeDate(null, true);       
+    }
 
-        setSelectedDate(date);        
+    const selectMonth = (e) => {
+        changeDate(`"${e.target.value} ${year}"`, null);     
+    }
+
+    const selectYear = (e) => {
+        changeDate(`"${month} ${e.target.value}"`, null);
     }
 
     let yearRange = [];
@@ -49,13 +39,7 @@ function Calendar() {
         yearRange.push(i);
     }
 
-    const selectMonth = (e) => {
-        setSelectedDate(new Date(`"${e.target.value} ${year}"`));        
-    }
 
-    const selectYear = (e) => {
-        setSelectedDate(new Date(`"${month} ${e.target.value}"`));  
-    }
 
     const variants = {
         visible: { opacity: 1, y:"0px", 
@@ -107,8 +91,7 @@ function Calendar() {
                     </div>
                 </motion.div>    
             </motion.div>
-            <Weeks firstDay={firstDay} daysInMonth={daysInMonth} daysPreviousMonth = {previousMonthDays} 
-            month = {month} year = {year}></Weeks>
+            <Weeks></Weeks>
             {/* <Month month={month} year={year}></Month> */}
         </motion.div>
     )

@@ -1,4 +1,5 @@
-import React, {useEffect, useState} from 'react'
+import React, {useEffect, useState, useContext} from 'react';
+import {CalendarContext} from '../../context/CalendarContext';
 import { format, getDaysInMonth } from 'date-fns';
 import { motion } from "framer-motion";
 
@@ -7,7 +8,14 @@ import Event from '../events/Events.js';
 import './Weeks.css';
 
 
-function Weeks(props) {
+function Weeks() {
+    const 
+    {month, 
+    year,
+    firstDay,
+    daysInMonth,
+    previousMonthDays} = useContext(CalendarContext);
+
     const [monthDays, setMonthDays] = useState([]);
     const [prevMonthDays, setPrevMonthDays] = useState([]);
     const [nextMonthDays, setNextMonthDays] = useState([]);
@@ -17,7 +25,7 @@ function Weeks(props) {
     useEffect(() => {
         calculateDays();
         hideEvents();
-    }, [props.month, props.year]);
+    }, [month, year]);
 
     const calculateDays = () => {
         setMonthDays([]);
@@ -26,19 +34,19 @@ function Weeks(props) {
 
         setTimeout(() => {
             let monthDaysList = [];
-            for (let i = 1; i <= props.daysInMonth; i++){
+            for (let i = 1; i <= daysInMonth; i++){
                 monthDaysList.push(i);
             }
             setMonthDays(monthDaysList);
 
             let prevMonthDaysList = [];
-            for (let i = (props.daysPreviousMonth - props.firstDay + 2); i <= props.daysPreviousMonth; i++){
+            for (let i = (previousMonthDays - firstDay + 2); i <= previousMonthDays; i++){
                 prevMonthDaysList.push(i);
             }
             setPrevMonthDays(prevMonthDaysList);
 
             let nextMonthDaysList = [];
-            for (let i = 1; i <= (42 - props.daysInMonth - props.firstDay + 1); i++){
+            for (let i = 1; i <= (42 - daysInMonth - firstDay + 1); i++){
                 nextMonthDaysList.push(i);
             }
             setNextMonthDays(nextMonthDaysList);
@@ -97,9 +105,7 @@ function Weeks(props) {
             time: "20:15"
         }           
     ]
-    
-    
-
+      
     const showEvents = (eventList) => {
         setOpenEvents(true);
         setEventList(eventList);
@@ -130,7 +136,7 @@ function Weeks(props) {
                 {monthDays.map((i) => (
                     <motion.div variants={dayVariants} style={{width: "100%", height: "100%"}}>
                         <Day day={i} currentMonth={true} key={i} currentDay={format(new Date, "d")}
-                        month = {props.month} year = {props.year} showEventsFunc={showEvents} eventList={eventList}></Day>
+                        month = {month} year = {year} showEventsFunc={showEvents} eventList={eventList}></Day>
                      </motion.div>
                 ))}
 
@@ -142,7 +148,7 @@ function Weeks(props) {
             </motion.div>            
             <motion.div className="event-modal">
                 <Event open={openEvents} hideEventsFunc={hideEvents} 
-                eventList={eventList} month = {props.month} year = {props.year}></Event>
+                eventList={eventList} month = {month} year = {year}></Event>
             </motion.div>
         </div>
     )
