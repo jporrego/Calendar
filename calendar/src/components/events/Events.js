@@ -60,8 +60,8 @@ function Event(props) {
         //props.showEventsFunc(tempList);
     }
 
-    return (
-        <div className="events" style={{display: props.open ? "flex" : "none"}}>
+    const eventsLayout = () => {
+         return (<div className="events" /*style={{display: props.open ? "flex" : "none"}}*/>
             <div className="events__date">
                 {month} {selectedDay}, {year} 
                 <div className="events__close-btn" onClick={props.hideEventsFunc}>x</div>
@@ -75,7 +75,38 @@ function Event(props) {
                 )) : null}
             </div>
             <div className="events__add-btn" onClick={createEvent}>+</div>
-        </div>
+        </div>)
+    }
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+    }
+
+    const formLayout = () => {
+        return (<div className="event-form">
+                <form onSubmit={handleSubmit} className="event-form__form">
+                    <label>
+                        Title
+                        <input type="text" name="title" maxLength="30" id="title"/>
+                    </label>
+                    <label>
+                        Description
+                        <textarea name="description" id="description" cols="30" rows="3" maxLength="100"></textarea>
+                    </label>
+                    <label>
+                        Time
+                        <input type="time" name="time" id="time"/>
+                    </label> 
+                    <div className="event-form__form__buttons">
+                        <input type="submit" value="Submit"/>
+                        <div className="event-form__cancel-btn">Cancel</div>
+                    </div>              
+                </form>
+            </div>)
+    }
+
+    return (
+        true ? eventsLayout() : formLayout()
     )
 }
 

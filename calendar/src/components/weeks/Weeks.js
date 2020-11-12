@@ -167,7 +167,7 @@ function Weeks() {
                 ))}
             </motion.div>            
             <motion.div className="event-modal">
-                <Events open={openEvents} hideEventsFunc={hideEvents} showEventsFunc={showEvents} month = {month} year = {year} showEventsFunc={showEvents} eventList={eventList}></Events>
+                {/*}<Events open={openEvents} hideEventsFunc={hideEvents} showEventsFunc={showEvents} month = {month} year = {year} showEventsFunc={showEvents} eventList={eventList}></Events>{*/}
             </motion.div>
         </div>
     )
