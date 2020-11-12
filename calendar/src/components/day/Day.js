@@ -23,8 +23,7 @@ function Day(props) {
         }
     }
     
-    const checkEvents = () => {
-        
+    const checkEvents = () => {        
         const localStorageEvents = JSON.parse(localStorage.getItem("events"));
         if (localStorageEvents) {
             const tempList = [];
