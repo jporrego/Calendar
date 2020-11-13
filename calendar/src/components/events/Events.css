@@ -1,15 +1,24 @@
+.event-background {
+    background-color: rgba(0, 0, 0, .01);
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, .1);
+    border: 0px solid rgba(0, 0, 0, .1);
+    z-index: 10;
+    position: relative;
+    left: -1rem;
+}
+
 .events {
     width: 50rem;
     height: 40rem;
     background-color: var(--bg-color);
-    box-shadow: 0px 5px 10px rgba(0, 0, 0, .1);
+    box-shadow: -3px 0px 7px rgba(0, 0, 0, .075);
     border-radius: 0rem 0rem 1rem 1rem;
     display: flex;
     flex-direction: column;
     position: relative;
     overflow: hidden;
     border: 1px solid rgba(0, 0, 0, .07);
-    margin-left: 5rem;
+    margin-left: 6rem;
 }
 
 .events__date {
@@ -18,7 +27,7 @@
     box-shadow: 0px 2px 5px rgba(0, 0, 0, .05);
     font-size: 1.6rem;
     font-weight: 500;
-    padding: .5rem 0rem .5rem 1rem;
+    padding: 1rem 0rem 1rem 1rem;
     display: flex;
     align-items: center;
 }
@@ -32,43 +41,51 @@
 .events__event-list__event {
     border-bottom: 1px solid rgba(0, 0, 0, .1);
     padding: 2rem;
+    display: column;
+    flex-direction: row;
+}
+
+.events__event-list__event__title-and-time {
     display: flex;
-    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.events__event-list__event__time {
+    font-size: 1.6rem;
+    font-weight: 300;
+}
+
+.events__event-list__event__title {
+    font-size: 1.6rem;
+    font-weight: 500;
+    margin-left: 1rem;
+    padding-left: 1rem;
+    border-left: 1px solid rgba(0, 0, 0, .2);
+    text-transform: capitalize;
 }
 
 .events__event-list__event__text {
     font-size: 1.6rem;
-    font-weight: 400;
-}
-
-.events__event-list__event__time {
-    font-size: 1.2rem;
     font-weight: 300;
 }
 
 .events__add-btn {
-    position: absolute;
-    right: 0;
-    bottom: 0;
-    font-size: 2rem;
+    margin-left: auto;
+    margin-right: 1.5rem;
+    font-size: 1.4rem;
     font-weight: 500;
     background-color: var(--primary-color);
     color: var(--font-color-light);
-    width: 3rem;
-    height: 3rem;
-    border-radius: 500px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 1rem;
-    margin-right: 1rem;
+    padding: .3rem 1rem;
+    border-radius: .5rem;
     cursor: pointer;
     user-select: none;
     transition: all .15s ease-out;
 }
 
 .events__add-btn:hover {
-    transform: scale(1.075);
+    transform: scale(1.025);
 }
 
 .events__close-btn {
@@ -92,7 +109,7 @@
     position: relative;
     overflow: hidden;
     border: 1px solid rgba(0, 0, 0, .07);
-    margin-left: 5rem;
+    margin-left: 6rem;
 }
 
 .event-form__form {
@@ -113,14 +130,26 @@
 
 #title {
     width: 60%;
-    padding: .5rem;
+    padding: .5rem 1rem;
     font-family: var(--font-primary);
+    font-size: 2rem;
+    border: none;
+    border-bottom: 2px solid var(--primary-color);
+    outline: none;
+    transition: all .1s ease-out;
+    background-color: rgba(0, 0, 0, .025);
+    border-radius: .5rem;
 }
+
+#title:focus {}
 
 #description {
     width: 100%;
     padding: .5rem;
     font-family: var(--font-primary);
+    background-color: rgba(0, 0, 0, .025);
+    border: none;
+    border-radius: .5rem;
 }
 
 #time {
@@ -137,7 +166,7 @@
 }
 
 .event-form__form__buttons input, .event-form__form__buttons div {
-    padding: 1rem 2rem;
+    padding: .51rem 2rem;
     text-decoration: none;
     border: none;
     background-color: var(--primary-color);
@@ -155,6 +184,7 @@
     cursor: pointer;
     outline: none;
     transition: all .1s ease-out;
+    border-radius: 1rem;
 }
 
 .event-form__form__buttons input:hover, .event-form__form__buttons div:hover {

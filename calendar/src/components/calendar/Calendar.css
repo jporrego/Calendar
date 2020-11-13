@@ -8,6 +8,7 @@
     grid-template-rows: max-content 1fr;
     justify-content: center;
     border-radius: 1rem;
+    z-index: 20;
 }
 
 .calendar__month-year {
