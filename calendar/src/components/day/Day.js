@@ -11,7 +11,7 @@ function Day(props) {
 
     useEffect(() => {
         checkEvents();
-    }, [props.eventList])
+    }, [calendarContext.refreshEvents])
 
     const setColor = () => {
         if (props.currentDay == props.day && props.month == format(new Date, "MMMM") && props.year == format(new Date, "yyyy")) {
@@ -41,8 +41,7 @@ function Day(props) {
     }
 
     const showEvents = () => {
-        props.showEventsFunc([events, props.day]);
-        calendarContext.selectDay(props.day);
+        calendarContext.selectDay(props.day, props.month, props.year);
     }
     
     return (

@@ -4,9 +4,10 @@
 
 :root {
   --primary-color: #4170f2;
+  --primary-color-light: #5d87fc;
   --bg-color: #fafafa;
   --bg-color-dark: rgba(13, 21, 26, 0.78);
-  --bg-color-light: rgb(41, 61, 73);
+  --bg-color-grey: rgb(175, 175, 175);
   --accent-color: #eb4848;
   --font-color-accent: #43e46b;
   --font-color-accent-dark: #272727;

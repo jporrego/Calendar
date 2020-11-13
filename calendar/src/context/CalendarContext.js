@@ -13,7 +13,12 @@ function CalendarContextProvider(props) {
     const [previousMonth, setPreviousMonth] = useState(format(addMonths(new Date, - 1), "MMMM"));
     const [previousMonthDays, setPreviousMonthDays] = useState(getDaysInMonth(addMonths(new Date, - 1)));
     const [nextMonth, setNextMonth] = useState(format(addMonths(new Date, + 1), "MMMM"));
-    const [selectedDay, setSelectedDay] = useState(format(new Date, "d"));
+    const [selectedDay, setSelectedDay] = useState({
+        day: format(new Date, "d"),
+        month: format(new Date, "MMMM"),
+        year: format(new Date, "yyyy")
+    });
+    const [refreshEvents, setRefreshEvents] = useState(0);
 
     useEffect(() => {
         // Actualiza el título del documento usando la API del navegador
@@ -43,10 +48,17 @@ function CalendarContextProvider(props) {
         }
     }
 
-    const selectDay = (day) => {
-        const date = new Date(`${month} ${day} ${year}`);
-        //setSelectedDay(format(`${month} ${day} ${year}`, "d"))
-        setSelectedDay(format(date, "d"))
+    const selectDay = (dayInfo, monthInfo, yearInfo) => {
+        const date = new Date(`${monthInfo} ${dayInfo} ${yearInfo}`);
+        setSelectedDay({
+            day: format(date, "d"),
+            month: format(date, "MMMM"),
+            year: format(date, "yyyy")
+        });
+    }
+
+    const refreshEventsFunc = () => {
+        setRefreshEvents(refreshEvents + 1);
     }
 
     return (
@@ -62,7 +74,9 @@ function CalendarContextProvider(props) {
             nextMonth,
             changeDate,
             selectedDay,
-            selectDay
+            selectDay,
+            refreshEvents,
+            refreshEventsFunc
         }}>
             {props.children}
         </CalendarContext.Provider>

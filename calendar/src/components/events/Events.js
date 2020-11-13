@@ -7,7 +7,7 @@ import './Events.css';
 import { motion, useAnimation } from 'framer-motion';
 
 function Event(props) {
-    const {selectedDay, month, year} = useContext(CalendarContext);
+    const {selectedDay, refreshEventsFunc} = useContext(CalendarContext);
 
     const [eventList, setEventList] = useState([]);
     const [showForm, setShowForm] = useState(false);
@@ -21,9 +21,7 @@ function Event(props) {
 
     useEffect(() => {
         updateEvents();
-    }, [selectedDay]);
-
-    
+    }, [selectedDay]);    
 
     const updateEvents = () => {
         const localStorageEvents = JSON.parse(localStorage.getItem("events"));
@@ -31,43 +29,13 @@ function Event(props) {
             const tempList = [];
 
             for (const i of localStorageEvents) {
-                if (i.day == selectedDay && i.month == month && i.year == year) {
+                if (i.day == selectedDay.day && i.month == selectedDay.month && i.year == selectedDay.year) {
                     tempList.push(i);
                 }
             }
 
             setEventList(tempList);
         }
-    }
-
-    const createEvent = () => {
-        let localStorageEvents = JSON.parse(localStorage.getItem("events"));
-        if (localStorageEvents == null) {
-            localStorageEvents = []
-        }
-        const newEvent = {
-            day: selectedDay,
-            month: month,
-            year: year,
-            text: "Text",
-            time: "21:20"
-        }
-        localStorageEvents.push(newEvent);
-        localStorage.setItem('events', JSON.stringify(localStorageEvents));
-
-        // ------------------------------
-        localStorageEvents = JSON.parse(localStorage.getItem("events"));
-        const tempList = [];
-        if (localStorageEvents) {            
-
-            for (const i of localStorageEvents) {
-                if (i.day == eventList[1] && i.month == month && i.year == year) {
-                    tempList.push(i);
-                }
-            }
-        }
-        updateEvents();
-        //props.showEventsFunc(tempList);
     }
 
     const handleChange = (e) => {
@@ -82,9 +50,9 @@ function Event(props) {
             localStorageEvents = []
         }
         const newEvent = {
-            day: selectedDay,
-            month: month,
-            year: year,
+            day: selectedDay.day,
+            month: selectedDay.month,
+            year: selectedDay.year,
             title: eventData.title,
             text: eventData.description,
             time: eventData.time
@@ -92,26 +60,16 @@ function Event(props) {
         localStorageEvents.push(newEvent);
         localStorage.setItem('events', JSON.stringify(localStorageEvents));
 
-        // ------------------------------
-        localStorageEvents = JSON.parse(localStorage.getItem("events"));
-        const tempList = [];
-        if (localStorageEvents) {            
-
-            for (const i of localStorageEvents) {
-                if (i.day == eventList[1] && i.month == month && i.year == year) {
-                    tempList.push(i);
-                }
-            }
-        }
         updateEvents();
         setShowForm(false);
+        refreshEventsFunc();
     }
 
     const eventsLayout = () => {
          return (
          <motion.div className="events" animate={controls}>
             <div className="events__date">
-                {month} {selectedDay}, {year} 
+                {selectedDay.month} {selectedDay.day}, {selectedDay.year} 
                 <div className="events__add-btn" onClick={() => (setShowForm(true), triggerAnimation())}>New Event</div>
             </div>
             <div className="events__event-list">
@@ -161,8 +119,8 @@ function Event(props) {
           })
     }
     return (
-        <motion.div animate={{x:[-100, 0], opacity:["0%", "100%"]}}
-        transition={{duration: 1, delay: .5}} 
+        <motion.div animate={{x:[-200, 0], opacity:["0%", "100%"]}}
+        transition={{duration: 1, delay: .5, damping: 0}} 
         className="event-background">
             {showForm ? formLayout() : eventsLayout()}
         </motion.div>

@@ -22,9 +22,9 @@
 }
 
 .events__date {
-    background-color: var(--color-grey);
+    background-color: var(--bg-color);
     color: var(--font-color-dark);
-    box-shadow: 0px 2px 5px rgba(0, 0, 0, .05);
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, .1);
     font-size: 1.6rem;
     font-weight: 500;
     padding: 1rem 0rem 1rem 1rem;
@@ -39,10 +39,13 @@
 }
 
 .events__event-list__event {
-    border-bottom: 1px solid rgba(0, 0, 0, .1);
     padding: 2rem;
-    display: column;
-    flex-direction: row;
+    display: flex;
+    flex-direction: column;
+}
+
+.events__event-list__event:not(:last-child) {
+    border-bottom: 1px solid rgba(0, 0, 0, .1);
 }
 
 .events__event-list__event__title-and-time {
@@ -68,6 +71,7 @@
 .events__event-list__event__text {
     font-size: 1.6rem;
     font-weight: 300;
+    word-break: break-all;
 }
 
 .events__add-btn {
@@ -85,7 +89,7 @@
 }
 
 .events__add-btn:hover {
-    transform: scale(1.025);
+    background-color: var(--primary-color-light);
 }
 
 .events__close-btn {
@@ -97,7 +101,7 @@
     cursor: pointer;
 }
 
-/* Event Form Styles */
+/* ---------------------- Event Form Styles ---------------------- */
 
 .event-form {
     width: 50rem;
@@ -188,5 +192,5 @@
 }
 
 .event-form__form__buttons input:hover, .event-form__form__buttons div:hover {
-    transform: scale(1.02);
+    background-color: var(--primary-color-light);
 }
