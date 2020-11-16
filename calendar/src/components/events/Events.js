@@ -25,6 +25,7 @@ function Event(props) {
 
     const updateEvents = () => {
         const localStorageEvents = JSON.parse(localStorage.getItem("events"));
+
         if (localStorageEvents) {
             const tempList = [];
 
@@ -34,7 +35,28 @@ function Event(props) {
                 }
             }
 
-            setEventList(tempList);
+            const sortedTempList = [];
+
+            for (let i = 0; i < tempList.length; i++){
+                let currentObjTime = Number(tempList[i].time.replace(":", ""));   
+                console.log(currentObjTime)             
+                if (i == 0) {
+                    sortedTempList.push(tempList[i])
+                } else if (currentObjTime > Number(sortedTempList[i-1].time.replace(":", ""))){
+                    sortedTempList.push(tempList[i])                                        
+                } else {
+                    let z = sortedTempList.length;
+                    while (currentObjTime < Number(sortedTempList[z-1].time.replace(":", ""))) {
+                        z--;
+                        if (z == 0) {
+                            break;
+                        }            
+                    }
+                    sortedTempList.splice(z, 0, tempList[i])    
+                }
+            }
+
+            setEventList(sortedTempList);
         }
     }
 
