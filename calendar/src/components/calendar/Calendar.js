@@ -42,13 +42,13 @@ function Calendar() {
 
 
     const variants = {
-        visible: { opacity: 1, y:"0px", 
+        visible: { opacity: 1, y:"0px",
         transition: {
           when: "beforeChildren",
           staggerChildren: 0,
           duration: .5,
         }, },
-        hidden: { opacity: 0, y:"-15spx" },
+        hidden: { opacity: 0, y:"-25px"},
       }
 
     return (

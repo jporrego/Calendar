@@ -8,8 +8,8 @@
 }
 
 .events {
-    width: 50rem;
-    height: 40rem;
+    width: 40rem;
+    height: 47rem;
     background-color: var(--bg-color);
     box-shadow: -3px 0px 7px rgba(0, 0, 0, .075);
     border-radius: 0rem 0rem 1rem 1rem;
@@ -56,7 +56,7 @@
 
 .events__event-list__event__time {
     font-size: 1.6rem;
-    font-weight: 300;
+    font-weight: 400;
 }
 
 .events__event-list__event__title {
@@ -101,11 +101,17 @@
     cursor: pointer;
 }
 
+.events__event-list__no-event-message {
+    font-size: 2rem;
+    font-weight: 300;
+    padding: 1rem;
+}
+
 /* ---------------------- Event Form Styles ---------------------- */
 
 .event-form {
-    width: 50rem;
-    height: 40rem;
+    width: 40rem;
+    height: 47rem;
     background-color: var(--bg-color);
     box-shadow: 0px 5px 10px rgba(0, 0, 0, .1);
     border-radius: 0rem 0rem 1rem 1rem;
@@ -133,12 +139,11 @@
 }
 
 #title {
-    width: 60%;
+    width: 80%;
     padding: .5rem 1rem;
     font-family: var(--font-primary);
     font-size: 2rem;
     border: none;
-    border-bottom: 2px solid var(--primary-color);
     outline: none;
     transition: all .1s ease-out;
     background-color: rgba(0, 0, 0, .025);
@@ -149,6 +154,8 @@
 
 #description {
     width: 100%;
+    height: 5rem;
+    min-height: 1rem;
     padding: .5rem;
     font-family: var(--font-primary);
     background-color: rgba(0, 0, 0, .025);
@@ -158,6 +165,8 @@
 
 #time {
     width: 8rem;
+    height: 3rem;
+    font-weight: 500;
     font-family: var(--font-primary);
 }
 
@@ -193,4 +202,32 @@
 
 .event-form__form__buttons input:hover, .event-form__form__buttons div:hover {
     background-color: var(--primary-color-light);
+}
+
+#cancel-btn {
+    background-color: rgba(0, 0, 0, .1);
+    color: var(--font-color-dark);
+}
+
+#cancel-btn:hover {
+    background-color: rgba(0, 0, 0, .07);
+}
+
+@media only screen and (max-width: 700px) {
+    .event-background {
+        left: 0rem;
+        margin-bottom: 0rem;
+    }
+    .events {
+        width: 40;
+        height: 47rem;
+        margin-left: 0rem;
+        margin-top: 4rem;
+    }
+    .event-form {
+        width: 40rem;
+        height: 47rem;
+        margin-left: 0rem;
+        margin-top: 4rem;
+    }
 }

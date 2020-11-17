@@ -39,7 +39,7 @@ function Event(props) {
 
             for (let i = 0; i < tempList.length; i++){
                 let currentObjTime = Number(tempList[i].time.replace(":", ""));   
-                console.log(currentObjTime)             
+             
                 if (i == 0) {
                     sortedTempList.push(tempList[i])
                 } else if (currentObjTime > Number(sortedTempList[i-1].time.replace(":", ""))){
@@ -85,6 +85,12 @@ function Event(props) {
         updateEvents();
         setShowForm(false);
         refreshEventsFunc();
+        setEventData({
+            title: "",
+            description: "",
+            time: ""
+    
+        });
     }
 
     const eventsLayout = () => {
@@ -103,7 +109,7 @@ function Event(props) {
                         </div>                                             
                         <div className="events__event-list__event__text">{i.text}</div>                    
                     </div> 
-                )) : null}
+                )) : <div className="events__event-list__no-event-message">You have no events scheduled for this day.</div>}
             </div>
             
         </motion.div>)
@@ -112,13 +118,18 @@ function Event(props) {
     const formLayout = () => {
         return (
             <motion.div className="event-form" animate={controls}>
-                <form onSubmit={handleSubmit} className="event-form__form">                               
-                    <input placeholder="Add a title" type="text" name="title" maxLength="30" id="title" onChange={handleChange} value={eventData.title} required/>
+                <form onSubmit={handleSubmit} className="event-form__form">
+                    <label>
+                        Title
+                        <input placeholder="" type="text" name="title" maxLength="35" 
+                        id="title" onChange={handleChange} value={eventData.title} required/>
+                    </label>                               
+                    
                     
                     <label>
                         Description
-                        <textarea name="description" id="description" cols="30" rows="3" 
-                        maxLength="100" onChange={handleChange} value={eventData.description}></textarea>
+                        <textarea name="description" id="description"  
+                        maxLength="120" onChange={handleChange} value={eventData.description} placeholder=""></textarea>
                     </label>
                     <label>
                         Time
@@ -126,7 +137,7 @@ function Event(props) {
                     </label> 
                     <div className="event-form__form__buttons">
                         <input type="submit" value="Submit"/>
-                        <div className="event-form__cancel-btn" onClick={() => (setShowForm(false), triggerAnimation())}>Cancel</div>
+                        <div className="event-form__cancel-btn" id="cancel-btn" onClick={() => (setShowForm(false), triggerAnimation())}>Cancel</div>
                     </div>              
                 </form>
             </motion.div>)

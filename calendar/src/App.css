@@ -37,3 +37,21 @@ body {
   color: var(--font-color-dark);
   overflow-x: hidden;
 }
+
+@media only screen and (max-width: 900px) {
+  html {
+    font-size: 0.5rem;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  html {
+    font-size: 0.38rem;
+  }
+}
+
+@media only screen and (max-width: 425px) {
+  html {
+    font-size: 0.35rem;
+  }
+}
